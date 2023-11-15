@@ -8,6 +8,7 @@ import sys
 import click
 
 from flask import Flask,render_template
+from flask import request, url_for, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 
 WIN = sys.platform.startswith('win')
@@ -26,39 +27,31 @@ class User(db.Model): # 表名将会是 user（自动生成，小写处理）
 	id = db.Column(db.Integer, primary_key=True) # 主键
 	name = db.Column(db.String(20)) # 名字
 
-class Movie(db.Model): # 表名将会是 movie
-	id = db.Column(db.Integer, primary_key=True) # 主键
-	title = db.Column(db.String(60)) # 电影标题
-	year = db.Column(db.String(4)) # 电影年份
+class movie_info(db.Model): 
+	movie_id = db.Column(db.String(10), primary_key = True, nullable = False)
+	movie_name = db.Column(db.String(20), nullable = False)
+	release_date = db.Column(db.DateTime)
+	country = db.Column(db.String(20))
+	type = db.Column(db.String(10))
+	year = db.Column(db.String(4))
+	addresses = db.relationship('movie_actor_relation', backref='movie_info', lazy = True)
 
-@app.cli.command()
-def forge():
-	"""Generate fake data."""
-	db.create_all()
+class move_box(db.Model):
+	movie_id = db.Column(db.String(10), primary_key = True, nullable = False)
+	box = db.Column(db.Float)
 
-	# 全局的两个变量移动到这个函数内
-	name = 'Lcc'
-	movies = [
-		{'title': 'My Neighbor Totoro', 'year': '1988'},
-		{'title': 'Dead Poets Society', 'year': '1989'},
-		{'title': 'A Perfect World', 'year': '1993'},
-		{'title': 'Leon', 'year': '1994'},
-		{'title': 'Mahjong', 'year': '1996'},
-		{'title': 'Swallowtail Butterfly', 'year': '1996'},
-		{'title': 'King of Comedy', 'year': '1999'},
-		{'title': 'Devils on the Doorstep', 'year': '1999'},
-		{'title': 'WALL-E', 'year': '2008'},
-		{'title': 'The Pork of Music', 'year': '2012'},
-	]
+class actor_info(db.Model):
+	actor_id = db.Column(db.String(10), primary_key = True, nullable = False)
+	actor_name = db.Column(db.String(20), nullable = False)
+	ender = db.Column(db.String(2), nullable = False)
+	country = db.Column(db.String(20))
+	addresses = db.relationship('movie_actor_relation', backref='actor_info', lazy = True)
 
-	user = User(name=name)
-	db.session.add(user)
-	for m in movies:
-		movie = Movie(title=m['title'], year=m['year'])
-		db.session.add(movie)
-
-	db.session.commit()
-	click.echo('Done.')
+class movie_actor_relation(db.Model):
+	id = db.Column(db.String(10), primary_key = True, nullable = False)
+	movie_id = db.Column(db.String(10), db.ForeignKey('movie_info.movie_id'), nullable = False)
+	actor_id = db.Column(db.String(10), db.ForeignKey('actor_info.actor_id'), nullable = False)
+	relation_type = db.Column(db.String(20))
 
 @app.context_processor
 def inject_user(): # 函数名可以随意修改
@@ -71,5 +64,32 @@ def page_not_found(e): # 接受异常对象作为参数
 
 @app.route('/')
 def index():
-    movies = Movie.query.all() # 读取所有电影记录
-    return render_template('index.html', movies=movies)
+	user = User.query.first()
+	movies = movie_info.query.all()
+	return render_template('index.html', user=user, movies=movies)
+
+@app.route('/input', methods=['GET', 'POST'])
+def input():
+	user = User.query.first()
+	movies = movie_info.query.all()
+	return render_template('index.html', user=user, movies=movies)
+
+@app.route('/movie_search', methods=['GET', 'POST'])
+def m_search():
+	movie_name ='请输入'
+	movie_data= ''
+	if request.method == 'POST':
+		movie_name = request.form['movie_name']
+		movie_data=movie_info.query.filter_by(movie_name=movie_name).first()
+	return render_template('movie_search.html',movie_name=movie_name,movie_data=movie_data)
+
+
+@app.route('/actor_search', methods=['GET', 'POST'])
+def a_search():
+	actor_name ='请输入'
+	actor_data= ''
+	if request.method == 'POST':
+		actor_name = request.form['actor_name']
+		actor_data=actor_info.query.filter_by(actor_name=actor_name).first()
+	return render_template('actor_search.html',actor_name=actor_name,actor_data=actor_data)
+

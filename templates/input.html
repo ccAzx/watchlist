@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>录入新数据</h3>
+
+<form method="post">
+	<strong>电影信息</strong><br>
+	电影ID <input type="text" name="movie_id" required><br>
+	电影名称 <input type="text" name="movie_name" required><br>
+	上映日期 <input type="date" name="release_date" required><br>
+	国家 <input type="text" name="country" required><br>
+	类型 <input type="text" name="type" required><br>
+	年份 <input type="text" name="year" required><br>
+	<strong>票房信息</strong><br>
+	票房 <input type="text" name="box" required><br>
+	<strong>演员信息</strong><br>
+	演员ID <input type="text" name="actor_id" required><br>
+	演员名称 <input type="text" name="actor_name" required><br>
+	性别 <input type="text" name="actor_gender" required><br>
+	国家 <input type="text" name="actor_country" required><br>
+	<strong>关系数据</strong><br>
+	关系ID <input type="text" name="movie_id" required><br>
+	关系类型 <input type="text" name="relation_type" required><br>
+	<input class="btn" type="submit" name="submit" value="提交">
+</form>
+
+{% endblock %}
