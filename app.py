@@ -188,17 +188,26 @@ def r_search():
 	actor_name ='请输入'
 	movie=''
 	actor=''
+	movie_id=''
+	actor_id=''
 	relations=[]
+	relation_all = movie_actor_relation.query.all()
+	movie_all=movie_info.query.all()
+	actor_all=actor_info.query.all()
 	if request.method == 'POST':
 		movie_name = request.form['movie_name']
 		actor_name = request.form['actor_name']
+		if movie_name and actor_name=='':
+			movie = movie_info.query.filter_by(movie_name=movie_name).first()
+			movie_id=movie.movie_id
+		if actor_name and movie_name=='':
+			actor = actor_info.query.filter_by(actor_name=actor_name).first()
+			actor_id=actor.actor_id
 		movie = movie_info.query.filter_by(movie_name=movie_name).first()
 		actor = actor_info.query.filter_by(actor_name=actor_name).first()
 		if movie and actor:
 			relations = movie_actor_relation.query.filter_by(movie_id=movie.movie_id, actor_id=actor.actor_id).all()
-			
-
-	return render_template('relation_search.html', movie_name=movie_name,movie=movie,actor=actor,relations=relations)
+	return render_template('relation_search.html', movie_name=movie_name,actor_name=actor_name,movie=movie,actor=actor,relations=relations,relation_all=relation_all,movie_id=movie_id,actor_id=actor_id,movie_all=movie_all,actor_all=actor_all)
 
 #电影编辑
 @app.route('/movie_edit/<int:movie_id>', methods=['GET', 'POST'])

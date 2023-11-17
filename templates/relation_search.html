@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h3>关系查询</h3>
+<h3>关系查询(可输入两项，也可只输入一项)</h3>
 <form method="post">
-	电影 <input type="text" name="movie_name" autocomplete="off" required >
-	演员 <input type="text" name="actor_name" autocomplete="off" required >
+	电影 <input type="text" name="movie_name" autocomplete="off">
+	演员 <input type="text" name="actor_name" autocomplete="off">
 	<input class="btn" type="submit" name="submit" value="查询">
 </form>
 
@@ -13,13 +13,36 @@
 		<p><strong>{{ actor.actor_name }}</strong>在<strong>{{ movie.movie_name }}</strong>中担任了<strong>{{ relation.relation_type }}</strong></p>
 	{% endfor %}
 {% endif %}
-{% if movie and actor and not relations%}
+{% if movie and actor %}
 	<p><strong>{{ actor.actor_name }}</strong>未参与<strong>{{ movie.movie_name }}</strong></p>
 {% endif %}
-{% if movie and not actor%}
+
+{% if movie_id%}
+	{% for relation in relation_all %}
+		{% if relation.movie_id==movie_id%}
+			{% for actor in actor_all %}
+				{% if actor.actor_id==relation.actor_id%}
+					<p><strong>{{ actor.actor_name }}</strong>在<strong>{{ movie_name }}</strong>中担任了<strong>{{ relation.relation_type }}</strong></p><br>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+	{% endfor %}
+{% endif %}
+{% if actor_id%}
+	{% for relation in relation_all %}
+		{% if relation.actor_id==actor_id%}
+			{% for movie in movie_all %}
+				{% if movie.movie_id==relation.movie_id%}
+					<p><strong>{{ actor_name }}</strong>在<strong>{{ movie.movie_name }}</strong>中担任了<strong>{{ relation.relation_type }}</strong></p><br>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+	{% endfor %}
+{% endif %}
+{% if movie and not actor and actor_id %}
 	<p>找不到该演员</p>
 {% endif %}
-{% if not movie and actor%}
+{% if not movie and actor and movie_id%}
 	<p>找不到该电影</p>
 {% endif %}
 {% if not movie and not actor and movie_name!='请输入'%}
