@@ -4,7 +4,7 @@
 	{% block head %}
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>{{ user.name }}'s Watchlist</title>
+	<title>电影查询网站 by lcc</title>
 	<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
 	{% endblock %}
@@ -15,10 +15,18 @@
 	{% endfor %}
 	<h2>
 		<img alt="fufu" class="fufu" src="{{ url_for('static', filename='images/fufu.png') }}">
-		{{ user.name }}'s Watchlist
+		电影查询网站 by lcc
+	</h2>
+	<h2>
+		{% if current_user.is_authenticated %}
+			<li><a href="{{ url_for('logout') }}">Logout</a></li>
+		{% else %}
+			<li><a href="{{ url_for('login') }}">Login</a></li>
+		{% endif %}
 	</h2>
 	<nav>
 		<ul>
+			
 			<li><a href="{{ url_for('index') }}">Movie</a></li>
 			<li><a href="{{ url_for('index_a') }}">Actor</a></li>
 			<li><a href="{{ url_for('index_r') }}">Relation</a></li>

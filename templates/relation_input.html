@@ -1,11 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-<h3>录入新数据</h3>
-
+<h3>关系录入</h3>
 <form method="post">
-	<a class="btn" href="{{ url_for('m_input') }}">电影录入
-	<a class="btn" href="{{ url_for('a_input') }}">演员录入
-	<a class="btn" href="{{ url_for('r_input') }}">关系录入</a>
+	电影名称<input type="text" name="movie_name" autocomplete="off" required><br>
+	演员名字 <input type="text" name="actor_name" autocomplete="off" required><br>
+	关系<input type="text" name="relation_type" autocomplete="off" required><br></a>
+	<input class="btn" type="submit" name="submit" value="录入">
 </form>
-
 {% endblock %}
