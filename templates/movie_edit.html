@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>电影编辑</h3>
+<form method="post">
+	电影名称 <input type="text" name="movie_name" autocomplete="off" required value={{movie.movie_name}}><br>
+	上映日期<input type="date" name="release_date" autocomplete="off" required value={{movie.release_date}}><br>
+	国家 <input type="text" name="country" autocomplete="off" required value={{movie.country}}><br>
+	类型 <input type="text" name="type" autocomplete="off" required value={{movie.type}}><br>
+	年份 <input type="text" name="year" autocomplete="off" required value={{movie.year}}><br>
+	票房 <input type="number" name="box" autocomplete="off" required step="0.01" value={{box.box}}></a>
+	<input class="btn" type="submit" name="submit" value="更改">
+</form>
+{% endblock %}

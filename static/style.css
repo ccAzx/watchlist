@@ -83,17 +83,26 @@ nav li a:hover {
 
 .btn {
 	font-size: 12px;
-	padding: 5px 50px;
+	padding: 5px 40px;
 	text-decoration: none;
 	cursor: pointer;
 	background-color: #87CEEB;
 	color: black;
 	border: 1px solid #555555;
 	border-radius: 5px;
-	width: 60px
+	width: 50px
 	text-align: center;
 }
-
+.btn1 {
+	font-size: 12px;
+	padding: 3px 5px;
+	text-decoration: none;
+	cursor: pointer;
+	background-color: white;
+	color: black;
+	border: 1px solid #555555;
+	border-radius: 5px;
+}
 .btn:hover {
 	text-decoration: none;
 	background-color: black;

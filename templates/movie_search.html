@@ -6,14 +6,21 @@
 	电影名称 <input type="text" name="movie_name" autocomplete="off" required value="{{ movie_name }}">
 	<input class="btn" type="submit" name="submit" value="查询">
 </form>
-{% if movie_data%}
-	<h1>电影信息</h1>
-	<p><strong>电影ID:</strong> {{ movie_data.movie_id }}</p>
-	<p><strong>电影名称:</strong> {{ movie_data.movie_name }}</p>
-	<p><strong>上映日期:</strong> {{ movie_data.release_date.strftime("%Y-%m-%d") }}</p>
-	<p><strong>国家:</strong> {{ movie_data.country }}</p>
-	<p><strong>类型:</strong> {{ movie_data.type }}</p>
-	<p><strong>年份:</strong> {{ movie_data.year }}</p>
+{% if movies%}
+	{% for movie in movies %}
+		<h1>电影信息</h1>
+		<p><strong>电影ID:</strong> {{ movie.movie_id }}</p>
+		<p><strong>电影名称:</strong> {{ movie.movie_name }}</p>
+		<p><strong>上映日期:</strong> {{ movie.release_date.strftime("%Y-%m-%d") }}</p>
+		<p><strong>国家:</strong> {{ movie.country }}</p>
+		<p><strong>类型:</strong> {{ movie.type }}</p>
+		<p><strong>年份:</strong> {{ movie.year }}</p>
+		{% for box in boxes %}
+			{% if box.movie_id==movie.movie_id%}
+				<p><strong>票房:</strong> {{ box.box }}</p>
+			{% endif %}
+		{% endfor %}
+	{% endfor %}
 {% elif movie_name !='请输入'%}
 	<h1>未在数据库中找到该电影</h1>
 {% endif %}

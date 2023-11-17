@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<p>{{ movies|length }} Titles</p>
+<p>{{ relations|length }} Titles</p>
 <form method="post">
 	<a class="btn" href="{{ url_for('input') }}">数据录入
 	<a class="btn" href="{{ url_for('m_search') }}">电影查询
@@ -9,24 +9,29 @@
 	<a class="btn" href="{{ url_for('r_search') }}">关系查询</a>
 </form>
 <ul class="movie-list">
-	{% for movie in movies %}
-	<li>{{ movie.movie_name }} - {{ movie.country }} - {{ movie.type }} - {{ movie.year }}
-		{% for box in boxes %}
-			{% if box.movie_id == movie.movie_id %}
-				-{{ box.box }}亿元
+	{% for relation in relations %}
+	<li>
+		{% for movie in movies %}
+			{% if movie.movie_id == relation.movie_id %}
+				{{ movie.movie_name }}-
 			{% endif %}
 		{% endfor %}
+
+		{% for actor in actors %}
+			{% if actor.actor_id == relation.actor_id %}
+				{{ actor.actor_name }}-
+			{% endif %}
+		{% endfor %}
+            		{{ relation.relation_type }}
 	<span class="float-right">
-		<a class="btn1" href="{{ url_for('m_edit', movie_id=movie.movie_id) }}">Edit</a>
-		<form class="inline-form" method="post" action="{{ url_for('m_delete',movie_id=movie.movie_id)	}}">
+		<a class="btn1" href="{{ url_for('r_edit', relation_id=relation.id) }}">Edit</a>
+		<form class="inline-form" method="post" action="{{ url_for('r_delete',relation_id=relation.id)	}}">
 			<input class="btn1" type="submit" name="delete" value="Delete" onclick="return confirm('Are you sure?')">
 		</form>
 	</span>
 	</li>
-{% endfor %}
+	{% endfor %}
 </ul>
 <img alt="Furina Skill" class="skill" src="{{ url_for('static', filename='images/fu.gif') }}"title="罪人舞步旋">
 {% endblock %}
-
-
 

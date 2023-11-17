@@ -19,7 +19,9 @@
 	</h2>
 	<nav>
 		<ul>
-			<li><a href="{{ url_for('index') }}">Home</a></li>
+			<li><a href="{{ url_for('index') }}">Movie</a></li>
+			<li><a href="{{ url_for('index_a') }}">Actor</a></li>
+			<li><a href="{{ url_for('index_r') }}">Relation</a></li>
 		</ul>
 	</nav>
 	{% block content %}{% endblock %}

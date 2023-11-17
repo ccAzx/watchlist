@@ -6,12 +6,14 @@
 	演员名字 <input type="text" name="actor_name" autocomplete="off" required value="{{ actor_name }}">
 	<input class="btn" type="submit" name="submit" value="查询">
 </form>
-{% if actor_data%}
-	<h1>演员信息</h1>
-	<p><strong>演员ID:</strong> {{ actor_data.actor_id }}</p>
-	<p><strong>演员名字:</strong> {{ actor_data.actor_name }}</p>
-	<p><strong>性别:</strong> {{ actor_data.ender }}</p>
-	<p><strong>国家:</strong> {{ actor_data.country }}</p>
+{% if actors%}
+	{% for actor in actors %}
+		<h1>演员信息</h1>
+		<p><strong>演员ID:</strong> {{ actor.actor_id }}</p>
+		<p><strong>演员名字:</strong> {{ actor.actor_name }}</p>
+		<p><strong>性别:</strong> {{ actor.ender }}</p>
+		<p><strong>国家:</strong> {{ actor.country }}</p>
+	{% endfor %}
 {% elif actor_name !='请输入'%}
 	<h1>未在数据库中找到该演员</h1>
 {% endif %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>电影录入</h3>
+<form method="post">
+	电影名称 <input type="text" name="movie_name" autocomplete="off" required><br>
+	上映日期<input type="date" name="release_date" autocomplete="off" required><br>
+	国家 <input type="text" name="country" autocomplete="off" required><br>
+	类型 <input type="text" name="type" autocomplete="off" required><br>
+	年份 <input type="text" name="year" autocomplete="off" required><br>
+	票房 <input type="number" name="box" autocomplete="off" required step="0.01"></a>
+	<input class="btn" type="submit" name="submit" value="录入">
+</form>
+{% endblock %}

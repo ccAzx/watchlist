@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<p>{{ movies|length }} Titles</p>
+<p>{{ actors|length }} Titles</p>
 <form method="post">
 	<a class="btn" href="{{ url_for('input') }}">数据录入
 	<a class="btn" href="{{ url_for('m_search') }}">电影查询
@@ -9,16 +9,11 @@
 	<a class="btn" href="{{ url_for('r_search') }}">关系查询</a>
 </form>
 <ul class="movie-list">
-	{% for movie in movies %}
-	<li>{{ movie.movie_name }} - {{ movie.country }} - {{ movie.type }} - {{ movie.year }}
-		{% for box in boxes %}
-			{% if box.movie_id == movie.movie_id %}
-				-{{ box.box }}亿元
-			{% endif %}
-		{% endfor %}
+	{% for actor in actors %}
+	<li>{{ actor.actor_name }} - {{ actor.ender }} - {{ actor.country }}
 	<span class="float-right">
-		<a class="btn1" href="{{ url_for('m_edit', movie_id=movie.movie_id) }}">Edit</a>
-		<form class="inline-form" method="post" action="{{ url_for('m_delete',movie_id=movie.movie_id)	}}">
+		<a class="btn1" href="{{ url_for('a_edit', actor_id=actor.actor_id) }}">Edit</a>
+		<form class="inline-form" method="post" action="{{ url_for('a_delete',actor_id=actor.actor_id)	}}">
 			<input class="btn1" type="submit" name="delete" value="Delete" onclick="return confirm('Are you sure?')">
 		</form>
 	</span>

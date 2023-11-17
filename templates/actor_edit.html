@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>演员编辑</h3>
+<form method="post">
+	演员名字 <input type="text" name="actor_name" autocomplete="off" required value={{actor.actor_name}}><br>
+	性别<input type="text" name="ender" autocomplete="off" required value={{actor.ender}}><br>
+	国家 <input type="text" name="country" autocomplete="off" required value={{actor.country}}><br>
+	<input class="btn" type="submit" name="submit" value="更改">
+</form>
+{% endblock %}
