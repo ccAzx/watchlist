@@ -199,10 +199,16 @@ def r_search():
 		actor_name = request.form['actor_name']
 		if movie_name and actor_name=='':
 			movie = movie_info.query.filter_by(movie_name=movie_name).first()
-			movie_id=movie.movie_id
+			if movie:
+				movie_id=movie.movie_id
+			else:
+				movie_id='0'
 		if actor_name and movie_name=='':
 			actor = actor_info.query.filter_by(actor_name=actor_name).first()
-			actor_id=actor.actor_id
+			if actor:
+				actor_id=actor.actor_id
+			else:
+				actor_id='0'
 		movie = movie_info.query.filter_by(movie_name=movie_name).first()
 		actor = actor_info.query.filter_by(actor_name=actor_name).first()
 		if movie and actor:

@@ -39,13 +39,13 @@
 		{% endif %}
 	{% endfor %}
 {% endif %}
-{% if movie and not actor and actor_id %}
+{% if movie and not actor and actor_id or actor_id=='0'%}
 	<p>找不到该演员</p>
 {% endif %}
-{% if not movie and actor and movie_id%}
+{% if not movie and actor and movie_id or movie_id=='0'%}
 	<p>找不到该电影</p>
 {% endif %}
-{% if not movie and not actor and movie_name!='请输入'%}
+{% if not movie and not actor and movie_name!='请输入' and actor_id!='0' and movie_id!='0'%}
 	<p>找不到该电影和演员</p>
 {% endif %}
 
