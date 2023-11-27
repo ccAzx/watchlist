@@ -4,7 +4,8 @@
 	{% block head %}
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>电影查询网站 by lcc</title>
+	
+	<h1 class="title">电影查询网站 by lcc</h1>
 	<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
 	{% endblock %}
@@ -13,15 +14,12 @@
 	{% for message in get_flashed_messages() %}
 		<div class="alert">{{ message }}</div>
 	{% endfor %}
-	<h2>
-		<img alt="fufu" class="fufu" src="{{ url_for('static', filename='images/fufu.png') }}">
-		电影查询网站 by lcc
-	</h2>
+	
 	<h2>
 		{% if current_user.is_authenticated %}
-			<li><a href="{{ url_for('logout') }}">Logout</a></li>
+			<li><a href="{{ url_for('logout') }}" class="btn2">登出</a></li>
 		{% else %}
-			<li><a href="{{ url_for('login') }}">Login</a></li>
+			<li><a href="{{ url_for('login') }}" class="btn2">登录</a></li>
 		{% endif %}
 	</h2>
 	<nav>

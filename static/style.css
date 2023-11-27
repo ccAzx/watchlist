@@ -1,9 +1,22 @@
-/* 页面整体 */
 body {
-margin: auto;
-max-width: 580px;
-font-size: 14px;
-font-family: Helvetica, Arial, sans-serif;
+  margin: 0 auto;
+  max-width: 580px;
+  font-size: 16px; /* Slightly increase the font size for a more elegant feel */
+  font-family: '楷体', serif;
+  position: relative;
+
+  color: #333; /* Set a default text color for better readability */
+}
+
+/* 为了在背景图像上提供更好的文本可读性，添加一个微妙的叠加效果 */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none; /* 确保叠加效果不影响用户交互 */
 }
 /* 页脚 */
 footer {
@@ -12,28 +25,49 @@ margin-top: 15px;
 text-align: center;
 padding: 10px;
 }
+
 /* 头像 */
 .furina {
 width: 40px;
 }
+
 /* 电影列表 */
 .movie-list {
-list-style-type: none;
-padding: 0;
-margin-bottom: 10px;
-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rg
-ba(0, 0, 0, 0.12);
+  list-style-type: none;
+  padding: 20px; /* Add more padding for spacing */
+  margin-bottom: 20px; /* Increase the margin for separation */
+  border-radius: 8px; /* Add border-radius for rounded corners */
+  background-color: #f5f5f5; /* Add a light background color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust the box shadow for a subtle effect */
 }
+/* Style for each movie item */
 .movie-list li {
-padding: 12px 24px;
-border-bottom: 1px solid #ddd;
+  margin-bottom: 10px; /* Increase the margin between each movie item */
+  padding: 10px; /* Add padding for a cleaner look */
+  border: 1px solid #ddd; /* Add a border to each movie item */
+  border-radius: 4px; /* Add border-radius for rounded corners */
+  background-color: #fff; /* Set a background color for each movie item */
+  transition: background-color 0.3s ease; /* Add a smooth transition effect on hover */
 }
-.movie-list li:last-child {
-border-bottom:none;
-}
+
+/* Change the background color on hover */
 .movie-list li:hover {
-background-color: #f8f9fa;
+  background-color: #f0f0f0;
 }
+
+/* Style for the movie title */
+.movie-list li h2 {
+  font-size: 18px; /* Increase the font size for the movie title */
+  color: #333; /* Set a darker color for better readability */
+  margin-bottom: 5px; /* Adjust the margin for spacing */
+}
+
+/* Style for additional movie details */
+.movie-list li p {
+  font-size: 14px; /* Set a smaller font size for additional details */
+  color: #666; /* Set a slightly darker color for better readability */
+}
+
 /* 大招图片 */
 .skill {
 display: block;
@@ -57,7 +91,7 @@ nav li a {
 	display: block;
 	color: white;
 	text-align: center;
-	padding: 8px 12px;
+	padding: 8px 72.4px;
 	text-decoration: none;
 }
 
@@ -79,20 +113,25 @@ nav li a:hover {
 	padding: 3px 5px;
 }
 
-
-
 .btn {
-	font-size: 12px;
-	padding: 5px 40px;
-	text-decoration: none;
-	cursor: pointer;
-	background-color: #87CEEB;
-	color: black;
-	border: 1px solid #555555;
-	border-radius: 5px;
-	width: 50px
-	text-align: center;
+  font-size: 16px; /* 略微增加字体大小 */
+  padding: 10px 37.5px; /* 调整内边距，使按钮更为舒适 */
+  text-decoration: none;
+  cursor: pointer;
+  background-color: #87CEEB; 
+  color: black; 
+border: none;
+  border-radius: 8px; /* 增加边框圆角 */
+  font-family: '楷体', sans-serif;
+  text-align: center;
+  transition: background-color 0.3s ease; /* 添加平滑的过渡效果 */
 }
+.btn:hover {
+	text-decoration: none;
+	background-color: black;
+	color: white;
+}
+
 .btn1 {
 	font-size: 12px;
 	padding: 3px 5px;
@@ -103,13 +142,40 @@ nav li a:hover {
 	border: 1px solid #555555;
 	border-radius: 5px;
 }
-.btn:hover {
+.btn2{ 
+ font-size: 20px; /* 略微增加字体大小 */
+  padding: 10px 50px; /* 调整内边距，使按钮更为舒适 */
+  text-decoration: none;
+  cursor: pointer;
+  background-color: #87CEEB; 
+  color: black; 
+  border-radius: 8px; /* 增加边框圆角 */
+  width: 120px; /* 增加按钮宽度 */
+ height: 50px;
+  text-align: center;
+  transition: background-color 0.3s ease; /* 添加平滑的过渡效果 */
+}
+.btn2:hover {
 	text-decoration: none;
 	background-color: black;
 	color: white;
-	border: 1px solid black;
 }
-
+.btn3 {
+  display: block; /* 将按钮设置为块级元素 */
+  width: 100%; /* 按钮宽度占满容器 */
+  padding: 10px; /* 内边距 */
+  background-color: #87CEEB; /* 按钮背景颜色 */
+  color: #fff; /* 按钮文字颜色 */
+  border: none; /* 移除按钮边框 */
+  border-radius: 5px; /* 圆角边框 */
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* 添加颜色变化的过渡效果 */
+}
+.btn3:hover {
+	text-decoration: none;
+	background-color: black;
+	color: white;
+}
 .alert {
 	position: relative;
 	padding: 7px;
