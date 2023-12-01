@@ -13,7 +13,7 @@
 		<p><strong>{{ actor.actor_name }}</strong>在<strong>{{ movie.movie_name }}</strong>中担任了<strong>{{ relation.relation_type }}</strong></p>
 	{% endfor %}
 {% endif %}
-{% if movie and actor %}
+{% if movie and actor and not relations%}
 	<p><strong>{{ actor.actor_name }}</strong>未参与<strong>{{ movie.movie_name }}</strong></p>
 {% endif %}
 
